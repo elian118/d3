@@ -1,11 +1,10 @@
 import './App.css';
-import { UdtData } from './pages/2-3.UdtData';
+import { Animation } from './pages/2-4.Animation';
 
 const App = () => {
   return (
     <div className="App">
-      {/*<BarGraph />*/}
-      <UdtData />
+      <Animation />
     </div>
   )
 }
