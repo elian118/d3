@@ -1,35 +1,22 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
 import './App.css';
-import { CstButton, Variants } from './components';
+import * as d3 from 'd3';
+import { dataSet } from './consts/dataSet';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  d3.select('#myGraph')
+    .selectAll('rect')
+    .data(dataSet)
+    .enter()
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', (data, idx) => idx * 25)
+    .attr('width', (data) => `${data}px`)
+    .attr('height', '20px');
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <CstButton />
-      <Variants />
+      <h1>가로형 막대그래프</h1>
+      <svg id="myGraph" />
     </div>
   )
 }
