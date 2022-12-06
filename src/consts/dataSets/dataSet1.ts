@@ -1,0 +1,1 @@
+export const dataSet1 = [300, 130, 5, 60, 240];

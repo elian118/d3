@@ -1,11 +1,11 @@
 import React from 'react';
 import * as d3 from 'd3';
-import { dataSet } from './dataSet';
+import { dataSet1 } from '../../consts/dataSets';
 
 export const BarGraph = () => {
   d3.select('#myGraph')
     .selectAll('rect')
-    .data(dataSet)
+    .data(dataSet1)
     .enter()
     .append('rect')
     .attr('x', 0)

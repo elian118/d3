@@ -1,10 +1,11 @@
 import './App.css';
-import { BarGraph } from './pages/BarGraph';
+import { UdtData } from './pages/2-3.UdtData';
 
 const App = () => {
   return (
     <div className="App">
-      <BarGraph />
+      {/*<BarGraph />*/}
+      <UdtData />
     </div>
   )
 }
