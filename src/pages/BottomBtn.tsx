@@ -1,25 +1,25 @@
 import React, { FC } from 'react';
 import { IconButton } from '@material-tailwind/react';
 import { ChevronLeft, ChevronRight } from '@/assets/icons';
+import { compList } from '@/consts/compList';
 
 type BottomBtnProps = {
-  list: JSX.Element[];
   disIdsState: [number, (val: number) => void];
 }
 
-export const BottomBtn: FC<BottomBtnProps> = ({list, disIdsState}) => {
+export const BottomBtn: FC<BottomBtnProps> = ({disIdsState}) => {
   const [disIdx, setDisIdx] = disIdsState;
   return (
     <div className="flex flex-row justify-center items-center">
       <IconButton
         className="mr-2"
-        style={{display: list[disIdx - 1] ? 'inherit' : 'none' }}
+        style={{display: compList[disIdx - 1] ? 'inherit' : 'none' }}
         onClick={() => setDisIdx(disIdx - 1)}
       >
         <ChevronLeft />
       </IconButton>
       <IconButton
-        style={{display: list[disIdx + 1] ? 'inherit' : 'none' }}
+        style={{display: compList[disIdx + 1] ? 'inherit' : 'none' }}
         onClick={() => setDisIdx(disIdx + 1)}
       >
         <ChevronRight />
