@@ -36,20 +36,27 @@ export const Animation = () => {
   }
 
   useEffect(() => {
-    dataSet.length <= 0
-      ? setDataSet(dataSet1)
-      : svg.on('click', (e) => handleClickRect(Number(e.target.id))); // id 속성에 입력된 idx 값을 그대로 전달
+    svg.on('click', (e) => handleClickRect(Number(e.target.id))); // id 속성에 입력된 idx 값을 그대로 전달
   }, [dataSet]);
+
+  useEffect(() => {
+    setDataSet(dataSet1);
+  }, [])
 
   return (
     <div>
-      <h1>가로형 막대그래프</h1>
-      <Button color="teal" ripple size="sm" onClick={() => {
+      <h1>애니메이션</h1>
+      <div className="text-base my-4 max-w-[500px]">
+        D3의 transition()과 delay() 메서드를 사용하면<br/>
+        애니메이션 효과도 부여할 수 있다.<br/>
+        버튼을 눌러 효과를 확인해보자.
+      </div>
+      <Button color="teal" className="my-2" ripple size="sm" onClick={() => {
         let newData: number[] = [...dataSet];
         newData.forEach((d, idx) => newData[idx] = (Math.floor(Math.random() * 400))); // 400 미만 값 랜덤 생성
         setDataSet(newData);
         updateData();
-      }}>데이터 업데이트</Button>
+      }}>랜덤 데이터 업데이트</Button>
       <svg ref={svgRef} className="border w-[420px] h-[240px] py-2 my-2 fill-amber-300 stroke-amber-200 hover:stroke-amber-700" />
     </div>
   );

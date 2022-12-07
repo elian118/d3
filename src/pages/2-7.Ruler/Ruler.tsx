@@ -71,11 +71,20 @@ export const Ruler = () => {
 
   return (
     <div>
-      <h1>가로형 막대그래프</h1>
-      <Button color="teal" ripple size="sm" onClick={() => {
+      <h1>눈금자 막대그래프</h1>
+      <div className="text-base my-4 max-w-[500px]">
+        눈금자까지 추가하려면 해당 요소를 D3로 추가하면 된다.<br/><br/>
+        일반적으로 눈금자 요소들을 일괄 그루핑하고<br/>
+        CSS 적용이 쉽도록 attr() 메서드로 class 속성을 부여한다.<br/>
+        이후 attr('transform', 값)으로 상하좌우 여백을 지정한 다음<br/>
+        call() 메서드로 눈금자 위치를 지정한다.<br/><br/>
+        아래 데이터는 CSV 파일에 저장된 데이터셋을 가져다 사용한다.<br/>
+        버튼을 눌러 데이터셋을 교체해보자.
+      </div>
+      <Button color="teal" ripple size="sm" className="mt-4" onClick={() => {
         importData();
-      }}>데이터 셋 교체</Button>
-      <svg ref={svgRef} className="w-[500px] h-[240px] my-2 fill-amber-300" />
+      }}>CSV 데이터 셋 교체</Button>
+      <svg ref={svgRef} className="w-[500px] h-[160px] my-4 fill-amber-300" />
     </div>
   );
 };
