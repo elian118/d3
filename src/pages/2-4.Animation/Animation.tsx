@@ -8,7 +8,7 @@ export const Animation = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const svg = d3.select(svgRef?.current);
 
-  const [dataSet, setDataSet] = useState<number[]>(dataSet1);
+  const [dataSet, setDataSet] = useState<number[]>([]);
 
   const updateData = () => {
     svg.selectAll('rect').data(dataSet)
@@ -36,15 +36,17 @@ export const Animation = () => {
   }
 
   useEffect(() => {
-    svg.on('click', (e) => handleClickRect(Number(e.target.id))); // id 속성에 입력된 idx 값을 그대로 전달
-  });
+    dataSet.length <= 0
+      ? setDataSet(dataSet1)
+      : svg.on('click', (e) => handleClickRect(Number(e.target.id))); // id 속성에 입력된 idx 값을 그대로 전달
+  }, [dataSet]);
 
   return (
     <div>
       <h1>가로형 막대그래프</h1>
       <Button color="teal" ripple size="sm" onClick={() => {
         let newData: number[] = [...dataSet];
-        newData.forEach((d, idx) => newData[idx] = Math.floor(Math.random() * 320)); // 320 미만 값 랜덤 생성
+        newData.forEach((d, idx) => newData[idx] = (Math.floor(Math.random() * 400))); // 400 미만 값 랜덤 생성
         setDataSet(newData);
         updateData();
       }}>데이터 업데이트</Button>
