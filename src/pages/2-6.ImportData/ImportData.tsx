@@ -17,7 +17,7 @@ export const ImportData = () => {
     // @rollup/plugin-dsv => dsv 활용 => csv 파일 import => 단, 첫 인덱스 키가 문자열로 파싱되는 오류 있음
     !!myData && setDataSet(myData.map((data) => {
       const items = Object.keys(data);
-      const selectItem = items[Math.floor(Math.random() * 10 * 0.5)];
+      const selectItem = items[Math.floor(Math.random() * 10)];
       return Number(data[selectItem]);
     }));
   }
