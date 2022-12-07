@@ -72,3 +72,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.axis text {
+  font-family: sans-serif;
+  font-size: 11px;
+  color: black;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+}

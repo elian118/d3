@@ -1,10 +1,10 @@
 import './App.css';
-import { ImportData } from '@/pages/2-6.ImportData';
+import { Ruler } from '@/pages/2-7.Ruler';
 
 const App = () => {
   return (
     <div className="App">
-      <ImportData />
+      <Ruler />
     </div>
   )
 }
