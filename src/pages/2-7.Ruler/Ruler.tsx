@@ -11,7 +11,7 @@ export const Ruler = () => {
 
   const [dataSet, setDataSet] = useState<number[]>([]);
 
-  const xScale = scaleLinear().domain([0, 500]).range([0, 450]);
+  const xScale = scaleLinear().domain([0, 450]).range([0, 450]);
 
   const importData = () => {
     // d3.csv 메소드는 vite 환경에서 완벽하게 돌아가지 않는다.
@@ -84,7 +84,7 @@ export const Ruler = () => {
       <Button color="teal" ripple size="sm" className="mt-4" onClick={() => {
         importData();
       }}>CSV 데이터 셋 교체</Button>
-      <svg ref={svgRef} className="w-[500px] h-[160px] my-4 fill-amber-300" />
+      <svg ref={svgRef} className="w-[470px] h-[160px] my-4 fill-amber-300" />
     </div>
   );
 };
