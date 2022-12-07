@@ -1,14 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button } from '@material-tailwind/react';
-import { dataSet1 } from '@/consts/dataSets';
 import * as d3 from 'd3';
+import { select } from 'd3';
+// @ts-ignore
+import myData from '../../consts/csv/myData.csv';
 import { Colors } from '@/consts/Colors';
+import { Button } from '@material-tailwind/react';
 
-export const Animation = () => {
+export const ImportData = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
-  const svg = d3.select(svgRef?.current);
+  const svg = select(svgRef?.current);
 
   const [dataSet, setDataSet] = useState<number[]>([]);
+
+  const importData = () => {
+    // d3.csv 메소드는 vite 환경에서 완벽하게 돌아가지 않는다.
+    // @rollup/plugin-dsv => dsv 활용 => csv 파일 import => 단, 첫 인덱스 키가 문자열로 파싱되는 오류 있음
+    !!myData && setDataSet(myData.map((data) => {
+      const items = Object.keys(data);
+      const selectItem = items[Math.floor(Math.random() * 10 * 0.5)];
+      return Number(data[selectItem]);
+    }));
+  }
 
   const updateData = () => {
     svg.selectAll('rect').data(dataSet)
@@ -37,19 +49,21 @@ export const Animation = () => {
 
   useEffect(() => {
     dataSet.length <= 0
-      ? setDataSet(dataSet1)
+      ? importData()
       : svg.on('click', (e) => handleClickRect(Number(e.target.id))); // id 속성에 입력된 idx 값을 그대로 전달
+    dataSet.length > 0 && updateData();
   }, [dataSet]);
+
+  useEffect(() => {
+    importData();
+  }, []);
 
   return (
     <div>
       <h1>가로형 막대그래프</h1>
       <Button color="teal" ripple size="sm" onClick={() => {
-        let newData: number[] = [...dataSet];
-        newData.forEach((d, idx) => newData[idx] = (Math.floor(Math.random() * 400))); // 400 미만 값 랜덤 생성
-        setDataSet(newData);
-        updateData();
-      }}>데이터 업데이트</Button>
+        importData();
+      }}>데이터 셋 교체</Button>
       <svg ref={svgRef} className="border w-[420px] h-[240px] py-2 my-2 fill-amber-300 stroke-amber-200 hover:stroke-amber-700" />
     </div>
   );

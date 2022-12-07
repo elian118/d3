@@ -1,10 +1,10 @@
 import './App.css';
-import { Animation } from './pages/2-4.Animation';
+import { ImportData } from '@/pages/2-6.ImportData';
 
 const App = () => {
   return (
     <div className="App">
-      <Animation />
+      <ImportData />
     </div>
   )
 }
