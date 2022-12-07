@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as d3 from 'd3';
-import { select } from 'd3';
+import { select, scaleLinear, axisBottom } from 'd3';
 // @ts-ignore
 import myData from '../../consts/csv/myData.csv';
 import { Colors } from '@/consts/Colors';
@@ -12,7 +11,7 @@ export const Ruler = () => {
 
   const [dataSet, setDataSet] = useState<number[]>([]);
 
-  const xScale = d3.scaleLinear().domain([0, 500]).range([0, 450]);
+  const xScale = scaleLinear().domain([0, 500]).range([0, 450]);
 
   const importData = () => {
     // d3.csv 메소드는 vite 환경에서 완벽하게 돌아가지 않는다.
@@ -29,7 +28,7 @@ export const Ruler = () => {
     svg.append('g') // 차트 위치에 g 태그 삽입(눈금자와 관련된 모든 요소를 g 태그 안에 삽입)
       .attr('class', 'axis') // g 태그 class 속성 값을 axis 로 지정
       .attr('transform', `translate(10, ${((1 + dataSet.length) * 20 + 5)})`) // .attr('transform', `translate(${xMargin}, ${yMargin})`) => 눈금자 위치 지정
-      .call(d3.axisBottom(xScale))
+      .call(axisBottom(xScale))
   }
 
   // 데이터 업데이트
@@ -54,8 +53,8 @@ export const Ruler = () => {
   const handleClickRect = (idx: number) => {
     svg.selectAll('rect').each(function(data, jdx) {
       jdx === idx
-        ? d3.select(this).style('fill', Colors.Cyan200).style('stroke', Colors.Gray300)
-        : d3.select(this).style('fill', Colors.Amber300);
+        ? select(this).style('fill', Colors.Cyan200).style('stroke', Colors.Gray300)
+        : select(this).style('fill', Colors.Amber300);
     })
   }
 
