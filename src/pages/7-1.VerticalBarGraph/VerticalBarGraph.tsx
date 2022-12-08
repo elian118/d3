@@ -66,10 +66,16 @@ export const VerticalBarGraph = () => {
     barElement.enter() // 데이터 수만큼 반복
       .append('rect') // 데이터 수만큼 rect 요소 추가
       .attr('class', 'bar')
-      .attr('height', (d) => d)
+      .attr('height', 0) // 높이 초기값 지정(애니메이션 시작 전)
       .attr('width', barWidth)
       .attr('x', (d, i) => i * (barWidth + barMargin) + offsetX) // x좌표 지정 => 그래프 간격 설정 + 보정치 추가
+      .attr('y', svgHeight - offsetY) // y좌표 초기값 지정(애니메이션 시작 전) => 그래프 가장 아래
+      // 애니메이션 효과 추가
+      .transition()
+      .duration(500)
+      .delay((d, i) => i * 50) // 인덱스마다 0.05초씩 순차 실행
       .attr('y', (d) => svgHeight - d - offsetY) // y좌표 지정 => 세로 그래프 보정치 부여(막대 그래프 시작점 보정) - 눈금자 중첩을 피하기 위한 보정치 추가
+      .attr('height', (d) => d);
 
     inputText();
     applyRuler();
