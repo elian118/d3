@@ -20,7 +20,7 @@ export const VerticalBarGraph = () => {
   const applyRuler = () => {
     let isThereYRuler = svg.selectAll('g')['_groups'][0].length > 0;
     // 세로 눈금 설정
-    !isThereYRuler && // 데이터 업뎃 때마다 기존 세로 눈금자에 새 세로 눈금자가 계속 덮어쓰기 되는 현상 방지
+    !isThereYRuler && // 데이터 업뎃 때마다 기존 세로 눈금자에 새로 생성된 세로 눈금자가 덮어쓰기 되는 현상 방지
     svg.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(${offsetX}, ${svgHeight - 300 - offsetY})`)
