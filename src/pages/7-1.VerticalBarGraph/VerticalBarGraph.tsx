@@ -47,7 +47,7 @@ export const VerticalBarGraph = () => {
       .text((d, i) => myData.map((data) => Object.keys(data))[0][i]);
   }
 
-  // 그래프 안의 데이터(숫자) 업데이트
+  // 그래프 속 데이터(숫자) 업데이트
   const updateText = () => {
     let barNums = svg.selectAll('.barNum').data(dataSet);
 
@@ -68,7 +68,7 @@ export const VerticalBarGraph = () => {
     .text((d) => d); // 데이터 표시
   }
 
-  // 데이터 추가
+  // 그래프 데이터 업데이트
   const updateData = () => {
     barElement = svg.selectAll('rect').data(dataSet);
 
@@ -100,7 +100,10 @@ export const VerticalBarGraph = () => {
     }));
   }
 
+  // 데이터 업데이트 감지 시 랜더 실행
   useEffect(() => {
+    // 데이터 업데이트를 그래프와 텍스트 두 번에 걸쳐 진행하는 이유는
+    // 업데이트를 처리하는 D3 join() 메서드가 한 번에 하나의 선택자들만 일괄 처리할 수 있기 때문
     dataSet.length > 0 && updateData();
     dataSet.length > 0 && updateText();
   }, [dataSet]);
