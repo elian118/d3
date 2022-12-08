@@ -124,7 +124,7 @@ export const VerticalBarGraph = () => {
       <Button color="teal" ripple size="sm" className="mt-4" onClick={() => {
         importData();
       }}>CSV 데이터 셋 교체</Button>
-      <svg ref={svgRef} className={`w-[${svgWidth}px] h-[${svgHeight + 10}px] my-4`} />
+      <svg ref={svgRef} className={`w-[${svgWidth}px] h-[250px] my-4`} />
     </div>
   );
 };
