@@ -18,6 +18,7 @@ export const VerticalBarGraph = () => {
   const yScale = scaleLinear().domain([0, 300]).range([300, 0]); // y 좌표가 거꾸로 계산되므로 range 반대로 입력
 
   const applyRuler = () => {
+    // 세로 눈금 설정
     svg.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(${offsetX}, ${svgHeight - 300 - offsetY})`)
@@ -26,6 +27,7 @@ export const VerticalBarGraph = () => {
           // .ticks(5) // 한 줄 안에 몇 개의 눈금을 보여줄 것인지 표시 옵션(기본 10개)
           // .tickFormat(format('.1f')) // 소수점 자릿수 표시 옵션. f 앞 숫자가 커질수록 표시할 소수점 아래 자릿수도 커진다.
       );
+    // 가로 눈금 설정 => 여기서는 레이블에 해당
     svg.append('rect')
       .attr('class', 'axisX')
       .attr('width', 320)
