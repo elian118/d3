@@ -18,7 +18,9 @@ export const VerticalBarGraph = () => {
   const yScale = scaleLinear().domain([0, dataMax]).range([dataMax, 0]); // y 좌표가 거꾸로 계산되므로 range 반대로 입력
 
   const applyRuler = () => {
+    let isThereYRuler = svg.selectAll('g')['_groups'][0].length > 0;
     // 세로 눈금 설정
+    !isThereYRuler && // 데이터를 업뎃할 때마다 요소 복제 방지
     svg.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(${offsetX}, ${svgHeight - 300 - offsetY})`)
