@@ -3,5 +3,6 @@ import { BarGraph } from '@/pages/2-2.BarGraph';
 import { UdtData } from '@/pages/2-3.UdtData';
 import { Animation } from '@/pages/2-4.Animation';
 import { Ruler } from '@/pages/2-7.Ruler';
+import { VerticalBarGraph } from '@/pages/7-1.VerticalBarGraph';
 
-export const compList = [<Sample />, <BarGraph />, <UdtData />, <Animation />, <Ruler />];
+export const compList = [<Sample />, <BarGraph />, <UdtData />, <Animation />, <Ruler />, <VerticalBarGraph/>];

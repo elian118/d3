@@ -1,0 +1,8 @@
+.bar {
+    @apply fill-amber-300;
+}
+
+.barNum {
+    @apply text-black text-xs text-center;
+    text-anchor: middle;
+}
