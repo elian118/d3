@@ -1,21 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { axisLeft, scaleLinear, select } from 'd3';
-import { dataSet2 } from '@/consts/dataSets';
 import './verticalBarGraphStyle.css';
+import {
+  barMargin,
+  barWidth,
+  dataMax,
+  initDataSet,
+  labels,
+  offsetX,
+  offsetY,
+  svgHeight, svgWidth,
+} from '@/consts/verticalBarGraph';
 
 export const VerticalBarGraph = () => {
-  const svgHeight = 240;
-  const offsetX = 30; // x좌표 어긋난 정도
-  const offsetY = 10; // y좌표 어긋난 정도
+  let barElement; // 막대그래프 막대 요소를 저장할 변수
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const svg = select(svgRef?.current);
-  let barElement;
 
   const [dataSet, setDataSet] = useState<number[]>([]);
 
   // 눈금 표시를 위한 스케일 설정
-  const yScale = scaleLinear().domain([0, 300]).range([300, 0]); // y 좌표가 거꾸로 계산되므로 range 반대로 입력
+  const yScale = scaleLinear().domain([0, dataMax]).range([dataMax, 0]); // y 좌표가 거꾸로 계산되므로 range 반대로 입력
 
   const applyRuler = () => {
     // 세로 눈금 설정
@@ -48,9 +54,9 @@ export const VerticalBarGraph = () => {
     barElement.enter()
       .append('text')
       .attr('class', 'barName')
-      .attr('x', (d, i) => i * 25 + 10 + offsetX)
+      .attr('x', (d, i) => i * (barWidth + barMargin) + 10 + offsetX)
       .attr('y', svgHeight - offsetY + 15)
-      .text((d, i) => ['A','B','C','D','E'][i]);
+      .text((d, i) => labels[i]);
   }
 
   // 데이터 추가
@@ -61,8 +67,8 @@ export const VerticalBarGraph = () => {
       .append('rect') // 데이터 수만큼 rect 요소 추가
       .attr('class', 'bar')
       .attr('height', (d) => d)
-      .attr('width', 20)
-      .attr('x', (d, i) => i * 25 + offsetX) // x좌표 지정 => 그래프 간격 설정 + 보정치 추가
+      .attr('width', barWidth)
+      .attr('x', (d, i) => i * (barWidth + barMargin) + offsetX) // x좌표 지정 => 그래프 간격 설정 + 보정치 추가
       .attr('y', (d) => svgHeight - d - offsetY) // y좌표 지정 => 세로 그래프 보정치 부여(막대 그래프 시작점 보정) - 눈금자 중첩을 피하기 위한 보정치 추가
 
     inputText();
@@ -74,7 +80,7 @@ export const VerticalBarGraph = () => {
   }, [dataSet]);
 
   useEffect(() => {
-    setDataSet(dataSet2);
+    setDataSet(initDataSet);
   }, []);
 
   return (
@@ -86,7 +92,7 @@ export const VerticalBarGraph = () => {
         아래로 갈 수록 숫자가 커지는 구조다.<br/><br/>
         즉, 코드로 입력하는 y좌표 값을 절대값으로 간주해야 한다.
       </div>
-      <svg ref={svgRef} className="w-full h-[250px] my-4" />
+      <svg ref={svgRef} className={`w-[${svgWidth}px] h-[${svgHeight + 10}px] my-4`} />
     </div>
   );
 };
