@@ -6,3 +6,13 @@
     @apply text-black text-xs text-center;
     text-anchor: middle;
 }
+
+.barName {
+    @apply text-xs;
+    text-anchor: middle;
+}
+
+.axisX line {
+    fill: none;
+    stroke: black;
+}

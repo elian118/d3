@@ -21,17 +21,34 @@ export const VerticalBarGraph = () => {
     svg.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(${offsetX}, ${svgHeight - 300 - offsetY})`)
-      .call(axisLeft(yScale))
+      .call(
+        axisLeft(yScale)
+          // .ticks(5) // 한 줄 안에 몇 개의 눈금을 보여줄 것인지 표시 옵션(기본 10개)
+          // .tickFormat(format('.1f')) // 소수점 자릿수 표시 옵션. f 앞 숫자가 커질수록 표시할 소수점 아래 자릿수도 커진다.
+      );
+    svg.append('rect')
+      .attr('class', 'axisX')
+      .attr('width', 320)
+      .attr('height', 1)
+      .attr('transform', `translate(${offsetX}, ${svgHeight - offsetY})`);
   }
 
-  // 그래프 안에 텍스트 입력 
-  const inputTextInGraph = () => {
+  // 텍스트 입력
+  const inputText = () => {
+    // 그래프 안에 데이터(숫자) 표시
     barElement.enter()
       .append('text')
       .attr('class', 'barNum')
       .attr('x', (d, i) => i * 25 + 10 + offsetX)
       .attr('y', svgHeight - 5 - offsetY)
       .text((d) => d); // 데이터 표시
+    // 막대 레이블 표시
+    barElement.enter()
+      .append('text')
+      .attr('class', 'barName')
+      .attr('x', (d, i) => i * 25 + 10 + offsetX)
+      .attr('y', svgHeight - offsetY + 15)
+      .text((d, i) => ['A','B','C','D','E'][i]);
   }
 
   // 데이터 추가
@@ -46,7 +63,7 @@ export const VerticalBarGraph = () => {
       .attr('x', (d, i) => i * 25 + offsetX) // x좌표 지정 => 그래프 간격 설정 + 보정치 추가
       .attr('y', (d) => svgHeight - d - offsetY) // y좌표 지정 => 세로 그래프 보정치 부여(막대 그래프 시작점 보정) - 눈금자 중첩을 피하기 위한 보정치 추가
 
-    inputTextInGraph();
+    inputText();
     applyRuler();
   }
 
@@ -67,7 +84,7 @@ export const VerticalBarGraph = () => {
         아래로 갈 수록 숫자가 커지는 구조다.<br/><br/>
         즉, 코드로 입력하는 y좌표 값을 절대값으로 간주해야 한다.
       </div>
-      <svg ref={svgRef} className="w-full h-[240px] my-4" />
+      <svg ref={svgRef} className="w-full h-[250px] my-4" />
     </div>
   );
 };
