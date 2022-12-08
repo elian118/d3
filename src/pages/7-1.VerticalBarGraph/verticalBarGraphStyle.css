@@ -1,5 +1,5 @@
 .bar {
-    @apply fill-amber-300 stroke-amber-50;
+    @apply fill-amber-300 stroke-amber-50 hover:fill-cyan-500;
 }
 
 .barNum {

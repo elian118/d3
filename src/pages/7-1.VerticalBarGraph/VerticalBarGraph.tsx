@@ -1,16 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { axisLeft, scaleLinear, select } from 'd3';
 import './verticalBarGraphStyle.css';
-import {
-  barMargin,
-  barWidth,
-  dataMax,
-  initDataSet,
-  labels,
-  offsetX,
-  offsetY,
-  svgHeight, svgWidth,
-} from '@/consts/verticalBarGraph';
+import { barMargin, barWidth, dataMax, offsetX, offsetY, svgHeight, svgWidth } from '@/consts/verticalBarGraph';
+// @ts-ignore
+import myData from '@/consts/csv/verticalMyData.csv';
+import { Button } from '@material-tailwind/react';
 
 export const VerticalBarGraph = () => {
   let barElement; // 막대그래프 막대 요소를 저장할 변수
@@ -41,31 +35,46 @@ export const VerticalBarGraph = () => {
       .attr('transform', `translate(${offsetX}, ${svgHeight - offsetY})`);
   }
 
-  // 텍스트 입력
-  const inputText = () => {
-    // 그래프 안에 데이터(숫자) 표시
-    barElement.enter()
-      .append('text')
-      .attr('class', 'barNum')
-      .attr('x', (d, i) => i * 25 + 10 + offsetX)
-      .attr('y', svgHeight - 5 - offsetY)
-      .text((d) => d); // 데이터 표시
-    // 막대 레이블 표시
+  // 막대 레이블 표시
+  const inputLabel = () => {
     barElement.enter()
       .append('text')
       .attr('class', 'barName')
       .attr('x', (d, i) => i * (barWidth + barMargin) + 10 + offsetX)
       .attr('y', svgHeight - offsetY + 15)
-      .text((d, i) => labels[i]);
+      .text((d, i) => myData.map((data) => Object.keys(data))[0][i]);
+  }
+
+  // 그래프 안의 데이터(숫자) 업데이트
+  const updateText = () => {
+    let barNums = svg.selectAll('.barNum').data(dataSet);
+
+    barNums
+    .join(
+      (enter) => enter.append('text').attr('class', 'barNum'),
+      (update) => update.attr('class', 'barNum'),
+      (exit) => exit.remove()
+    )
+    .style('opacity', 0)
+      // 애니메이션 효과 추가
+    .transition()
+    .duration(500)
+    .delay((d, i) => i * 50) // 인덱스마다 0.05초씩 순차 실행
+    .style('opacity', 1)
+    .attr('x', (d, i) => i * 25 + 10 + offsetX)
+    .attr('y', svgHeight - 5 - offsetY)
+    .text((d) => d); // 데이터 표시
   }
 
   // 데이터 추가
-  const inputData = () => {
+  const updateData = () => {
     barElement = svg.selectAll('rect').data(dataSet);
 
-    barElement.enter() // 데이터 수만큼 반복
-      .append('rect') // 데이터 수만큼 rect 요소 추가
-      .attr('class', 'bar')
+    barElement
+      .join((enter) => enter.append('rect').attr('class', 'bar'),
+        (update) => update.attr('class', 'bar'),
+        (exit) => exit.remove()
+      )
       .attr('height', 0) // 높이 초기값 지정(애니메이션 시작 전)
       .attr('width', barWidth)
       .attr('x', (d, i) => i * (barWidth + barMargin) + offsetX) // x좌표 지정 => 그래프 간격 설정 + 보정치 추가
@@ -77,16 +86,25 @@ export const VerticalBarGraph = () => {
       .attr('y', (d) => svgHeight - d - offsetY) // y좌표 지정 => 세로 그래프 보정치 부여(막대 그래프 시작점 보정) - 눈금자 중첩을 피하기 위한 보정치 추가
       .attr('height', (d) => d);
 
-    inputText();
+    inputLabel();
     applyRuler();
   }
 
+  const importData = () => {
+    !!myData && setDataSet(myData.map((data) => {
+      const items = Object.keys(data);
+      const selectItem = items[Math.floor(Math.random() * 10)];
+      return Number(data[selectItem]);
+    }));
+  }
+
   useEffect(() => {
-    dataSet.length > 0 && inputData();
+    dataSet.length > 0 && updateData();
+    dataSet.length > 0 && updateText();
   }, [dataSet]);
 
   useEffect(() => {
-    setDataSet(initDataSet);
+    importData();
   }, []);
 
   return (
@@ -98,6 +116,9 @@ export const VerticalBarGraph = () => {
         아래로 갈 수록 숫자가 커지는 구조다.<br/><br/>
         즉, 코드로 입력하는 y좌표 값을 절대값으로 간주해야 한다.
       </div>
+      <Button color="teal" ripple size="sm" className="mt-4" onClick={() => {
+        importData();
+      }}>CSV 데이터 셋 교체</Button>
       <svg ref={svgRef} className={`w-[${svgWidth}px] h-[${svgHeight + 10}px] my-4`} />
     </div>
   );
