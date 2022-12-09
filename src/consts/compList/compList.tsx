@@ -4,5 +4,14 @@ import { UdtData } from '@/pages/2-3.UdtData';
 import { Animation } from '@/pages/2-4.Animation';
 import { Ruler } from '@/pages/2-7.Ruler';
 import { VerticalBarGraph } from '@/pages/7-1.VerticalBarGraph';
+import { PieChartSample } from '@/pages/8-1.PieChart';
 
-export const compList = [<Sample />, <BarGraph />, <UdtData />, <Animation />, <Ruler />, <VerticalBarGraph/>];
+export const compList = [
+  <Sample />,
+  <BarGraph />,
+  <UdtData />,
+  <Animation />,
+  <Ruler />,
+  <VerticalBarGraph />,
+  <PieChartSample />
+];
