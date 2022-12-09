@@ -13,7 +13,7 @@ export const PieChartSample = () => {
   const [dataSet, setDataSet] = useState<number[]>([]);
 
   const pie = d3.pie(); // 원 그래프 좌표 계산 => 데이터 타입이 존재하면 랩퍼 지정도 가능하다.
-  const arc = d3.arc<PieArcDatum<any>>().innerRadius(10).outerRadius(100); // 원 그래프 안쪽 반지름, 바깥 반지름 설정
+  const arc = d3.arc<PieArcDatum<any>>().innerRadius(10).outerRadius(100); // 원 그래프 안쪽 반지름, 바깥 반지름 설정 =>
   let pieElement = svg.selectAll('path').data(pie(dataSet));
 
   const updateData = () => {

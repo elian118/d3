@@ -5,7 +5,12 @@ export const DescView = () => {
     <div className="text-base my-4 max-w-[500px]">
       원 그래프는 좌표 계산에 pie(),
       <br />
-      반지름 계산에 arc() 메소드를 주로 사용한다.
+      반지름 계산에 arc() 메소드를 사용한다.
+      <br />
+      <br />
+      arc() 값은 이후 주입된 데이터에 따라 계산된
+      <br />
+      각각의 비율로 부채꼴 크기를 제한하게 된다.
       <br />
       <br />
       타입스크립트 환경에서는
