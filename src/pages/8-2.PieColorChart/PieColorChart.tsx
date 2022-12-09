@@ -15,7 +15,7 @@ export const PieColorChart = () => {
   const arc = d3
     .arc<PieArcDatum<number | { valueOf(): number }>>()
     .innerRadius(10)
-    .outerRadius(100); // 원 그래프 안쪽 반지름, 바깥 반지름 설정 =>
+    .outerRadius(100); // 원 그래프 안쪽 반지름, 바깥 반지름 설정
   const d3Colors = scaleOrdinal<string>(schemeCategory10); // d3에서 제공하는 표준 10색(schemeCategory10) => 그 외 색상 세트는 schemeCategory10 -> ctrl + click 으로 확인 가능
 
   let pieElement = svg.selectAll('path').data(pie(dataSet));

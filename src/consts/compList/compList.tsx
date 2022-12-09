@@ -6,6 +6,7 @@ import { Ruler } from '@/pages/2-7.Ruler';
 import { VerticalBarGraph } from '@/pages/7-1.VerticalBarGraph';
 import { PieChartSample } from '@/pages/8-1.PieChart';
 import { PieColorChart } from '@/pages/8-2.PieColorChart';
+import { PieAnimationChart } from '@/pages/8-3.PieAnimationChart';
 
 export const compList = [
   <Sample />,
@@ -16,4 +17,5 @@ export const compList = [
   <VerticalBarGraph />,
   <PieChartSample />,
   <PieColorChart />,
+  <PieAnimationChart />,
 ];

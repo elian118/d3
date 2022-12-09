@@ -13,9 +13,8 @@ export const DescView = () => {
       다양한 색상세트를 제공한다.
       <br />
       <br />
-      단, 색상 설정은 아직 typescript와 비친화적라
-      <br />
-      any를 사용할 일이 많다.
+      참고로, 아직 D3는 typescript 호환도가 낮아
+      <br />원 그래프부터 any를 사용할 일이 많다.
     </div>
   );
 };
