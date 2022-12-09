@@ -3,12 +3,12 @@ import React from 'react';
 export const DescView = () => {
   return (
     <div className="text-base my-4 max-w-[500px]">
-      원 그래프는 좌표 계산에 pie(),
+      원 그래프는 path 요소를 사용하고,
       <br />
-      반지름 계산에 arc() 메소드를 사용한다.
+      좌표와 반지름 계산에 pie(), arc()를 사용한다.
       <br />
       <br />
-      arc() 값은 이후 주입된 데이터에 따라 계산된
+      준비된 arc()는 주입된 데이터에 따라 계산된
       <br />
       각각의 비율로 부채꼴 크기를 제한하게 된다.
       <br />
