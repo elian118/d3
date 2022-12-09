@@ -11,10 +11,13 @@ export const Animation = () => {
   const [dataSet, setDataSet] = useState<number[]>([]);
 
   const updateData = () => {
-    svg.selectAll('rect').data(dataSet)
-      .join((enter) => enter.append('rect'),
+    svg
+      .selectAll('rect')
+      .data(dataSet)
+      .join(
+        (enter) => enter.append('rect'),
         (update) => update.attr('class', 'updated'),
-        (exit) => exit.remove()
+        (exit) => exit.remove(),
       )
       .transition() // 애니메이션 효과 추가
       .delay((d, idx) => idx * 100) // 딜레이 효과 => 첫 행부터 0.1초 간격으로 순차 실행
@@ -24,16 +27,19 @@ export const Animation = () => {
       .attr('width', (data) => `${data}px`)
       .attr('height', '20px')
       .style('fill', Colors.Amber300)
-      .style('stroke', Colors.Amber200)
-  }
+      .style('stroke', Colors.Amber200);
+  };
 
   const handleClickRect = (idx: number) => {
-    svg.selectAll('rect').each(function(data, jdx) {
+    svg.selectAll('rect').each(function (data, jdx) {
       jdx === idx
-        ? d3.select(this).style('fill', Colors.Cyan200).style('stroke', Colors.Gray300)
+        ? d3
+            .select(this)
+            .style('fill', Colors.Cyan200)
+            .style('stroke', Colors.Gray300)
         : d3.select(this).style('fill', Colors.Amber300);
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     svg.on('click', (e) => handleClickRect(Number(e.target.id))); // id 속성에 입력된 idx 값을 그대로 전달
@@ -41,23 +47,38 @@ export const Animation = () => {
 
   useEffect(() => {
     setDataSet(dataSet1);
-  }, [])
+  }, []);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <h1>애니메이션</h1>
       <div className="text-base my-4 max-w-[500px]">
-        D3의 transition()과 delay() 메서드를 사용하면<br/>
-        애니메이션 효과도 부여할 수 있다.<br/>
+        D3의 transition()과 delay() 메서드를 사용하면
+        <br />
+        애니메이션 효과도 부여할 수 있다.
+        <br />
         버튼을 눌러 효과를 확인해보자.
       </div>
-      <Button color="teal" className="my-2" ripple size="sm" onClick={() => {
-        let newData: number[] = [...dataSet];
-        newData.forEach((d, idx) => newData[idx] = (Math.floor(Math.random() * 400))); // 400 미만 값 랜덤 생성
-        setDataSet(newData);
-        updateData();
-      }}>랜덤 데이터 업데이트</Button>
-      <svg ref={svgRef} className="border w-[420px] h-[240px] py-2 my-2 fill-amber-300 stroke-amber-200 hover:stroke-amber-700" />
+      <Button
+        color="teal"
+        className="my-2"
+        ripple
+        size="sm"
+        onClick={() => {
+          let newData: number[] = [...dataSet];
+          newData.forEach(
+            (d, idx) => (newData[idx] = Math.floor(Math.random() * 400)),
+          ); // 400 미만 값 랜덤 생성
+          setDataSet(newData);
+          updateData();
+        }}
+      >
+        랜덤 데이터 업데이트
+      </Button>
+      <svg
+        ref={svgRef}
+        className="border w-[420px] h-[240px] py-2 my-2 fill-amber-300 stroke-amber-200 hover:stroke-amber-700"
+      />
     </div>
   );
 };

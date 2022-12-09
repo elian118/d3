@@ -36,10 +36,10 @@ export const PieChartSample = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <h1>원 그래프 개요</h1>
       <DescView />
-      <svg ref={svgRef} className={`w-[300px] h-[300px] my-4`} />
+      <svg ref={svgRef} className="w-[300px] h-[300px]" />
     </div>
   );
 };

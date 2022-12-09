@@ -7,7 +7,7 @@ const App = () => {
   const [disIdx, setDisIdx] = useState<number>(0);
 
   useEffect(() => {
-    setDisIdx(0);
+    setDisIdx(7);
   }, []);
 
   return (
@@ -15,7 +15,7 @@ const App = () => {
       {compList[disIdx]}
       <BottomBtn disIdsState={[disIdx, setDisIdx]} />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

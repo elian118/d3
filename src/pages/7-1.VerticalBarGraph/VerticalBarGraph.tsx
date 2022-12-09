@@ -132,7 +132,7 @@ export const VerticalBarGraph = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <h1>세로형 막대그래프</h1>
       <DescView />
       <Button

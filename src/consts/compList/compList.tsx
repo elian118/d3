@@ -5,6 +5,7 @@ import { Animation } from '@/pages/2-4.Animation';
 import { Ruler } from '@/pages/2-7.Ruler';
 import { VerticalBarGraph } from '@/pages/7-1.VerticalBarGraph';
 import { PieChartSample } from '@/pages/8-1.PieChart';
+import { PieColorChart } from '@/pages/8-2.PieColorChart';
 
 export const compList = [
   <Sample />,
@@ -13,5 +14,6 @@ export const compList = [
   <Animation />,
   <Ruler />,
   <VerticalBarGraph />,
-  <PieChartSample />
+  <PieChartSample />,
+  <PieColorChart />,
 ];
