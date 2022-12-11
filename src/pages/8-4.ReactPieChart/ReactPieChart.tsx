@@ -12,7 +12,7 @@ import { DescView } from './DescView';
 import { Button } from '@material-tailwind/react';
 import '../../styles/pieChart/pieChartStyle.css';
 
-export const ReactTextPieChart = () => {
+export const ReactPieChart = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const svg = select(svgRef?.current);
 
