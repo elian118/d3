@@ -1,5 +1,7 @@
 export const svgWidth = 320;
 export const svgHeight = 240;
+export const svgWidth2 = 360;
+export const svgHeight2 = 360;
 export const offsetX = 30; // x좌표 어긋난 정도
 export const offsetY = 10; // y좌표 어긋난 정도
 export const dataMax = 300; // 데이터 최대값

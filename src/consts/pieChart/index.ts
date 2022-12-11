@@ -1,4 +1,20 @@
 import { Colors } from '@/consts/Colors';
+// @ts-ignore
+import myData2020q3 from '../csv/myData2020q3.csv';
+// @ts-ignore
+import myData2020q4 from '../csv/myData2020q4.csv';
+// @ts-ignore
+import myData2021q1 from '../csv/myData2021q1.csv';
+// @ts-ignore
+import myData2021q2 from '../csv/myData2021q2.csv';
+// @ts-ignore
+import myData2021q3 from '../csv/myData2021q3.csv';
+// @ts-ignore
+import myData2021q4 from '../csv/myData2021q4.csv';
+// @ts-ignore
+import myData2022q1 from '../csv/myData2022q1.csv';
+// @ts-ignore
+import myData2022q2 from '../csv/myData2022q2.csv';
 
 export const svgWidth = 320;
 export const svgHeight = 240;
@@ -22,4 +38,15 @@ export const cstColors = [
   Colors.Fuchsia500,
   Colors.Pink500,
   Colors.Rose500,
+];
+
+export const options = [
+  { name: '2020년 3분기', fileName: myData2020q3 },
+  { name: '2020년 4분기', fileName: myData2020q4 },
+  { name: '2021년 1분기', fileName: myData2021q1 },
+  { name: '2021년 2분기', fileName: myData2021q2 },
+  { name: '2021년 3분기', fileName: myData2021q3 },
+  { name: '2021년 4분기', fileName: myData2021q4 },
+  { name: '2022년 1분기', fileName: myData2022q1 },
+  { name: '2022년 2분기', fileName: myData2022q2 },
 ];
