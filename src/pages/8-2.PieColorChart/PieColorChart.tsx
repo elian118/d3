@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { PieArcDatum, scaleOrdinal, schemeCategory10, select } from 'd3';
-import { svgWidth } from '@/consts/verticalBarGraph';
+import { svgWidth } from '@/consts/pieChart';
 import { initDataSet2, svgHeight } from '@/consts/pieChart';
-import { DescView } from '@/pages/8-2.PieColorChart/DescView';
+import { DescView } from './DescView';
+import '../../styles/pieChart/pieChartStyle.css';
 
 export const PieColorChart = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);

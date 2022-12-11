@@ -7,6 +7,7 @@ import { VerticalBarGraph } from '@/pages/7-1.VerticalBarGraph';
 import { PieChartSample } from '@/pages/8-1.PieChart';
 import { PieColorChart } from '@/pages/8-2.PieColorChart';
 import { PieAnimationChart } from '@/pages/8-3.PieAnimationChart';
+import { ReactTextPieChart } from '@/pages/8-4.ReactTextPieChart';
 
 export const compList = [
   <Sample />,
@@ -18,4 +19,5 @@ export const compList = [
   <PieChartSample />,
   <PieColorChart />,
   <PieAnimationChart />,
+  <ReactTextPieChart />,
 ];

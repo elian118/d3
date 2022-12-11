@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import '../../styles/pieChart/pieChartStyle.css';
-import { svgWidth } from '@/consts/verticalBarGraph';
+import { svgWidth } from '@/consts/pieChart';
 import { PieArcDatum, select } from 'd3';
 import { initDataSet, svgHeight } from '@/consts/pieChart';
 import { DescView } from '@/pages/8-1.PieChart/DescView';

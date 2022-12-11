@@ -1,3 +1,13 @@
 .pie {
     @apply fill-amber-500 stroke-amber-50;
 }
+
+.total {
+    @apply text-xs;
+    text-anchor: middle;
+}
+
+.pieNum {
+    @apply text-xs;
+    text-anchor: middle
+}
