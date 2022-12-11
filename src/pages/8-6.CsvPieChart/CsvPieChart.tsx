@@ -65,26 +65,31 @@ export const CsvPieChart = () => {
     <div className="flex flex-col justify-center items-center">
       <h1>리액트 CSV 원 그래프</h1>
       <div className="my-4">
-        <Select
-          defaultValue={options[0].name}
-          label="년도/분기 선택"
-          color="teal"
-          animate={{
-            mount: { y: 0 },
-            unmount: { y: 25 },
-          }}
-          onChange={(name) =>
-            importData(
-              options[options.findIndex((o) => o.name === name)].fileName,
-            )
-          }
-        >
-          {options.map((opt, idx) => (
-            <Option key={idx} value={opt.name}>
-              {opt.name}
-            </Option>
-          ))}
-        </Select>
+        <div className="flex flex-row items-center justify-center">
+          <div className="text-lg font-bold mr-4 min-w-max">
+            글로벌 스마트폰 시장 점유율
+          </div>
+          <Select
+            defaultValue={options[0].name}
+            label="년도/분기 선택"
+            color="teal"
+            animate={{
+              mount: { y: 0 },
+              unmount: { y: 25 },
+            }}
+            onChange={(name) =>
+              importData(
+                options[options.findIndex((o) => o.name === name)].fileName,
+              )
+            }
+          >
+            {options.map((opt, idx) => (
+              <Option key={idx} value={opt.name}>
+                {opt.name}
+              </Option>
+            ))}
+          </Select>
+        </div>
       </div>
       <svg ref={svgRef} className="w-[360px] h-[360px]">
         <text
