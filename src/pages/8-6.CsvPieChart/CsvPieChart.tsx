@@ -53,7 +53,6 @@ export const CsvPieChart = () => {
         // @ts-ignore
         return (t) => arc(interpol(t)); // 정해진 시간에 맞추어 interpolate 인자 a -> b로 적용 => 애니메이션에 반영
       });
-    console.log('pie', pie);
   };
 
   useEffect(() => {
