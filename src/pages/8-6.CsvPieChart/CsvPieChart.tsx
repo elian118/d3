@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Option, Select } from '@material-tailwind/react';
-import { cstColors, options } from '@/consts/pieChart';
+import { options } from '@/consts/pieChart';
 import * as d3 from 'd3';
 import { interpolate, PieArcDatum, select } from 'd3';
-import { svgHeight2, svgWidth2 } from '@/consts/verticalBarGraph';
 import { CsvFileType } from '@/types/pieChart';
+import { DataSetView, TitleView, TotalTextView } from './views';
 
 export const CsvPieChart = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -67,59 +66,10 @@ export const CsvPieChart = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <h1>리액트 CSV 원 그래프</h1>
-      <div className="my-4">
-        <div className="flex flex-row items-center justify-center">
-          <div className="text-lg font-bold mr-4 min-w-max">
-            글로벌 스마트폰 시장 점유율
-          </div>
-          <Select
-            defaultValue={options[0].name}
-            label="년도/분기 선택"
-            color="teal"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-            onChange={(name) =>
-              importData(
-                options[options.findIndex((o) => o.name === name)].fileName,
-              )
-            }
-          >
-            {options.map((opt, idx) => (
-              <Option key={idx} value={opt.name}>
-                {opt.name}
-              </Option>
-            ))}
-          </Select>
-        </div>
-      </div>
+      <TitleView importData={importData} />
       <svg ref={svgRef} className="w-[360px] h-[360px]">
-        <text
-          className="total"
-          transform={`translate(${svgWidth2 / 2}, ${svgHeight2 / 2 + 5})`}
-        >
-          점유율
-        </text>
-        {dataSet.length > 0 &&
-          pie.map((d, idx) => (
-            <g
-              key={idx}
-              transform={`translate(${svgWidth2 / 2}, ${svgHeight2 / 2})`}
-            >
-              <path
-                className="pie"
-                d={arc(d) ?? undefined}
-                style={{ fill: cstColors[idx] }}
-              />
-              <text
-                className="pieNum"
-                transform={`translate(${arc.centroid(d)})`}
-              >
-                {`${d.data.label}`} {`${d.data.ratio}%`}
-              </text>
-            </g>
-          ))}
+        <TotalTextView />
+        <DataSetView dataSet={dataSet} pie={pie} arc={arc} />
       </svg>
     </div>
   );
