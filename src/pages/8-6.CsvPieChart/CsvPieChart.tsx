@@ -4,24 +4,27 @@ import { cstColors, options } from '@/consts/pieChart';
 import * as d3 from 'd3';
 import { interpolate, PieArcDatum, select } from 'd3';
 import { svgHeight2, svgWidth2 } from '@/consts/verticalBarGraph';
+import { CsvFileType } from '@/types/pieChart';
 
 export const CsvPieChart = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const svg = select(svgRef?.current);
 
-  const [keys, setKeys] = useState<string[]>([]);
-  const [dataSet, setDataSet] = useState<number[]>([]);
+  const [dataSet, setDataSet] = useState<CsvFileType[]>([]);
 
-  let pie = d3.pie<number>().value((d) => d)(dataSet);
-  let arc = d3.arc<PieArcDatum<number>>().innerRadius(30).outerRadius(180);
+  let pie = d3.pie<CsvFileType>().value((d) => Number(d.ratio))(dataSet);
+  let arc = d3.arc<PieArcDatum<CsvFileType>>().innerRadius(30).outerRadius(180);
   let pieElement;
   let textElement;
 
   const importData = (file) => {
     const keys = Object.keys(file[0]);
     const values = Object.values<number>(file[0]);
-    setDataSet(values);
-    setKeys(keys);
+    let obj = keys.map((key, idx) => ({
+      label: key,
+      ratio: Number(values[idx]),
+    }));
+    setDataSet(obj);
   };
 
   const updateText = () => {
@@ -34,7 +37,7 @@ export const CsvPieChart = () => {
       .style('opacity', 1);
   };
 
-  const updateData = () => {
+  const updateGraph = () => {
     pieElement = svg.selectAll('path').data(pie);
     pieElement
       .style('opacity', 0)
@@ -44,16 +47,17 @@ export const CsvPieChart = () => {
       .style('opacity', 1)
       .attrTween('d', (d) => {
         const interpol = interpolate(
-          { startAngle: d.startAngle, endAngle: d.startAngle },
-          { startAngle: d.startAngle, endAngle: d.endAngle },
+          { startAngle: d.startAngle, endAngle: d.startAngle }, // 애니메이션 동작 초기값 지정
+          { startAngle: d.startAngle, endAngle: d.endAngle }, // 애니메이션 동작 이후 값 지정
         );
         // @ts-ignore
-        return (t) => arc(interpol(t));
+        return (t) => arc(interpol(t)); // 정해진 시간에 맞추어 interpolate 인자 a -> b로 적용 => 애니메이션에 반영
       });
+    console.log('pie', pie);
   };
 
   useEffect(() => {
-    updateData();
+    updateGraph();
     updateText();
   }, [dataSet]);
 
@@ -99,21 +103,21 @@ export const CsvPieChart = () => {
           점유율
         </text>
         {dataSet.length > 0 &&
-          pie.map((data, idx) => (
+          pie.map((d, idx) => (
             <g
               key={idx}
               transform={`translate(${svgWidth2 / 2}, ${svgHeight2 / 2})`}
             >
               <path
                 className="pie"
-                d={arc(data) ?? undefined}
+                d={arc(d) ?? undefined}
                 style={{ fill: cstColors[idx] }}
               />
               <text
                 className="pieNum"
-                transform={`translate(${arc.centroid(data)})`}
+                transform={`translate(${arc.centroid(d)})`}
               >
-                {`${keys[idx]}`} {`${data.value}%`}
+                {`${d.data.label}`} {`${d.data.ratio}%`}
               </text>
             </g>
           ))}
@@ -121,3 +125,15 @@ export const CsvPieChart = () => {
     </div>
   );
 };
+
+/*
+  참고로 원 그래프 비율이 설정돼 있는 pie 첫 번째 요소 정보는 아래와 같다.
+  0: {
+    data: { label: 'Samsung', ratio: 22 }, // 원본 데이터
+    endAngle: 3.769911184307752, // 부채꼴 종료 각도
+    index: 1, // 인덱스
+    padAngle: 0, // 부채골 패딩
+    startAngle: 2.387610416728243,  // 부채꼴 시작 각도
+    value: 22 // arc 계산에 전달되는 실질적인 값
+  }, ...
+*/

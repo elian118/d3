@@ -1,4 +1,4 @@
 export type CsvFileType = {
   label: string;
-  ratio: string;
+  ratio: number;
 };
