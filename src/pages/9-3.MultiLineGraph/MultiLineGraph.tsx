@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { axisLeft, line, scaleLinear, select } from 'd3';
-import { dataSet1, dataSet2, dataSet3 } from '@/consts/dataSets/lineGraph';
+import { axisLeft, curveBasis, scaleLinear, select } from 'd3';
 import {
-  margin,
+  curves,
+  dataSet1,
+  dataSet2,
+  dataSet3,
+} from '@/consts/dataSets/lineGraph';
+import {
   offsetX,
   offsetY,
   scale,
@@ -10,16 +14,16 @@ import {
   svgWidth,
 } from '@/consts/lineGraph';
 import { DescView } from '@/pages/9-3.MultiLineGraph/DescView';
+import { DrawGraph } from '@/pages/9-3.MultiLineGraph/DrawGraph';
+import { Option, Select } from '@material-tailwind/react';
+import { CurveFactory } from 'd3-shape';
 
 export const MultiLineGraph = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const svg = select(svgRef?.current);
 
   const [dataArr, setDataArr] = useState<number[][]>([]);
-
-  let myLines = line<number>()
-    .x((d, i) => offsetX + i * margin) // x좌표 = (표시 순서 * 간격)
-    .y((d) => svgHeight - Number(d) * scale - offsetY); // 데이터로부터 Y 좌표 빼기, 범위 두 배로 확대
+  const [curve, setCurve] = useState<CurveFactory[]>([curveBasis]);
 
   let yScale = scaleLinear()
     .domain([0, 100])
@@ -31,6 +35,7 @@ export const MultiLineGraph = () => {
 
   useEffect(() => {
     setDataArr([dataSet1, dataSet2, dataSet3]);
+    setCurve([curveBasis]);
     return () => setDataArr([]);
   }, [dataArr.length]);
 
@@ -38,6 +43,21 @@ export const MultiLineGraph = () => {
     <div className="flex flex-col justify-center items-center">
       <h1>다중 꺾은선 그래프</h1>
       <DescView />
+      <div className="w-80 my-4">
+        <Select
+          label="커브 타입 선택"
+          color="teal"
+          onChange={(name) =>
+            setCurve([curves[curves.findIndex((x) => x.label === name)].value])
+          }
+        >
+          {curves.map((type, idx) => (
+            <Option key={`${type.label}-${idx}`} value={type.label}>
+              {type.label}
+            </Option>
+          ))}
+        </Select>
+      </div>
       <svg ref={svgRef} className="w-[360px] h-[240px] border border-gray-200">
         <g className="axis" transform={`translate(${offsetX}, ${offsetY})`} />
         {dataArr.length > 0 &&
@@ -52,10 +72,11 @@ export const MultiLineGraph = () => {
           ))}
         {dataArr.length > 0 &&
           dataArr.map((data, idx) => (
-            <path
-              key={`item${idx + 1}`}
-              className={`line item${idx + 1}`}
-              d={myLines(data) ?? '0'}
+            <DrawGraph
+              key={`item-${idx + 1}`}
+              data={data}
+              idx={idx}
+              curve={curve}
             />
           ))}
       </svg>
