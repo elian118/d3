@@ -10,6 +10,8 @@ import { PieAnimationChart } from '@/pages/8-3.PieAnimationChart';
 import { ReactPieChart } from '@/pages/8-4.ReactPieChart';
 import { TextPieChart } from '@/pages/8-5.TextPieChart';
 import { CsvPieChart } from '@/pages/8-6.CsvPieChart/CsvPieChart';
+import { LineGraph } from '@/pages/9-1.LineGraph';
+import { TextLineGraph } from '@/pages/9-2.TextLineGraph';
 
 export const compList = [
   <Sample />,
@@ -24,4 +26,6 @@ export const compList = [
   <ReactPieChart />,
   <TextPieChart />,
   <CsvPieChart />,
+  <LineGraph />,
+  <TextLineGraph />,
 ];
