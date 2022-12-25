@@ -13,3 +13,15 @@
 .axisX line {
     @apply fill-none stroke-black;
 }
+
+.item1 {
+    @apply stroke-amber-500;
+}
+
+.item2 {
+    @apply stroke-teal-500;
+}
+
+.item3 {
+    @apply stroke-blue-500;
+}

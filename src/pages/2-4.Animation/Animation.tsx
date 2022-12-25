@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@material-tailwind/react';
-import { dataSet1 } from '@/consts/dataSets';
+import { dataSet1 } from '@/consts/dataSets/lineGraph';
 import * as d3 from 'd3';
 import { Colors } from '@/consts/Colors';
 

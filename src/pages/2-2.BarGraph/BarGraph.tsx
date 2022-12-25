@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
-import { dataSet1 } from '@/consts/dataSets';
+import { dataSet1 } from '@/consts/dataSets/lineGraph';
 
 export const BarGraph = () => {
   const [dataSet, setDataSet] = useState<number[]>([]);

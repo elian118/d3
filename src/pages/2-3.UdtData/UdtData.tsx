@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@material-tailwind/react';
 import { select } from 'd3';
-import { dataSet1, dataSet2 } from '@/consts/dataSets';
+import { dataSet1, dataSet2 } from '@/consts/dataSets/lineGraph';
 
 export const UdtData = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
