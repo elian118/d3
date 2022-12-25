@@ -20,11 +20,11 @@ export const TextLineGraph = () => {
 
   let myLines = line<number>()
     .x((d, i) => offsetX + i * margin) // x좌표 = (표시 순서 * 간격)
-    .y((d) => svgHeight - Number(d) * scale - offsetY); // 데이터로부터 Y 좌표 빼기
+    .y((d) => svgHeight - Number(d) * scale - offsetY); // 데이터로부터 Y 좌표 빼기, 범위 두 배로 확대
 
   let yScale = scaleLinear()
     .domain([0, 100])
-    .range([scale * 100, 0]);
+    .range([scale * 100, 0]); // 범위(y축 높이) 두 배로 확대 => 꺾은선 추이가 그래프에 잘 드러나도록..
 
   svg
     .select('.axis') // 눈금자 요소를 배치할 위치 지정
