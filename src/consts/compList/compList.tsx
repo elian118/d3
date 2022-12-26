@@ -14,6 +14,7 @@ import { LineGraph } from '@/pages/9-1.LineGraph';
 import { TextLineGraph } from '@/pages/9-2.TextLineGraph';
 import { MultiLineGraph } from '@/pages/9-3.MultiLineGraph';
 import { JsonMultiLineGraph } from '@/pages/9-4.JsonMultiLineGraph';
+import { MeasureOfDispersion } from '@/pages/10-1.MeasureOfDispersion';
 
 export const compList = [
   <Sample />,
@@ -32,4 +33,5 @@ export const compList = [
   <TextLineGraph />,
   <MultiLineGraph />,
   <JsonMultiLineGraph />,
+  <MeasureOfDispersion />,
 ];
