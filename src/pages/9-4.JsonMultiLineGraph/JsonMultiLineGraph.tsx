@@ -9,8 +9,8 @@ import {
   svgHeight,
   svgWidth,
 } from '@/consts/lineGraph';
-import { jsonDataSet } from '@/consts/dataSets/lineGraph';
-import { JsonData } from '@/types/lineChart';
+import { jsonDataSet1 } from '@/consts/dataSets/lineGraph';
+import { JsonData, JsonDataSet } from '@/types/lineChart';
 import { DrawGraph } from './DrawGraph';
 import { DescView } from './DescView';
 import '../../styles/lineGraph/lineGraphStyle.css';
@@ -35,21 +35,35 @@ export const JsonMultiLineGraph = () => {
   );
   svg.select('.axisY').call(axisLeft(yScale) as any);
 
-  const dataMapping = () => {
+  const dataMapping = (dataSet: JsonDataSet[]) => {
     let tempDataArr: JsonData[][] = [];
     let tempData: JsonData[] = [];
-    const keys = Object.keys(jsonDataSet[0]).filter((e) => e.includes('item'));
+    const keys = Object.keys(dataSet[0]).filter((e) => e.includes('item'));
 
     keys.forEach((x) => {
       tempData = [];
-      tempData = jsonDataSet.map((e) => ({ year: e.year, value: e[x] }));
+      tempData = dataSet.map((e) => ({ year: e.year, value: e[x] }));
       tempDataArr.push(tempData);
     });
     setDataArr(tempDataArr);
   };
 
+  const animate = () => {
+    svg
+      .selectAll('.line')
+      .style('opacity', 0)
+      .transition()
+      .duration(dataArr.length * (700 / dataArr.length))
+      .delay((d, i) => i * (700 / dataArr.length))
+      .style('opacity', 1);
+  };
+
   useEffect(() => {
-    dataMapping();
+    dataArr.length > 0 && animate();
+  }, [dataArr, curve]);
+
+  useEffect(() => {
+    dataMapping(jsonDataSet1);
     setCurve([curveBasis]);
     return () => setDataArr([]);
   }, [dataArr.length]);
@@ -58,7 +72,7 @@ export const JsonMultiLineGraph = () => {
     <div className="flex flex-col justify-center items-center">
       <h1>다중 꺾은선 그래프 - JSON</h1>
       <DescView />
-      <SelectBoxView setCurve={setCurve} />
+      <SelectBoxView setCurve={setCurve} dataMapping={dataMapping} />
       <svg
         ref={svgRef}
         className="w-[360px] h-[250px] border border-gray-200 overflow-visible" // overflow-visible: 넘치는 텍스트 그대로 표시
