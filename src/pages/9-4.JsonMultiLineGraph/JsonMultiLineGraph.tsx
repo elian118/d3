@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SelectBoxView } from '@/pages/9-3.MultiLineGraph';
+import { SelectBoxView } from './SelectBoxView';
 import { axisBottom, axisLeft, curveBasis, scaleLinear, select } from 'd3';
 import { CurveFactory } from 'd3-shape';
 import {

@@ -11,7 +11,7 @@ import {
 import { DescView } from '@/pages/9-3.MultiLineGraph/DescView';
 import { DrawGraph } from '@/pages/9-3.MultiLineGraph/DrawGraph';
 import { CurveFactory } from 'd3-shape';
-import { SelectBoxView } from '@/pages/9-3.MultiLineGraph/SelectBoxView';
+import { SelectBoxView } from './SelectBoxView';
 
 export const MultiLineGraph = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);

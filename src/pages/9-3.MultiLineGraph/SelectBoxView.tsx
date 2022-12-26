@@ -1,24 +1,13 @@
 import React, { FC } from 'react';
 import { Option, Select } from '@material-tailwind/react';
-import {
-  curves,
-  jsonDataSet1,
-  jsonDataSet2,
-  jsonDataSet3,
-  jsonDataSet4,
-  jsonDataSet5,
-} from '@/consts/dataSets/lineGraph';
+import { curves } from '@/consts/dataSets/lineGraph';
 import { CurveFactory } from 'd3-shape';
 
 type SelectBoxViewProps = {
   setCurve: (val: CurveFactory[]) => void;
-  dataMapping: (dataSet: any[]) => void;
 };
 
-export const SelectBoxView: FC<SelectBoxViewProps> = ({
-  setCurve,
-  dataMapping,
-}) => {
+export const SelectBoxView: FC<SelectBoxViewProps> = ({ setCurve }) => {
   return (
     <div className="w-80 my-4 flex flex-row items-center justify-center">
       <div className="mr-2">
@@ -36,26 +25,6 @@ export const SelectBoxView: FC<SelectBoxViewProps> = ({
           ))}
         </Select>
       </div>
-      <Select
-        label="데이터셋"
-        color="amber"
-        onChange={(dataSetNo) => {
-          const targets = [
-            jsonDataSet1,
-            jsonDataSet2,
-            jsonDataSet3,
-            jsonDataSet4,
-            jsonDataSet5,
-          ];
-          dataMapping(targets[Number(dataSetNo as string) - 1]);
-        }}
-      >
-        {[1, 2, 3, 4, 5].map((e, i) => (
-          <Option key={`options-${i}`} value={String(e)}>
-            데이터셋-{e}
-          </Option>
-        ))}
-      </Select>
     </div>
   );
 };
