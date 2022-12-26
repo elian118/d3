@@ -66,7 +66,7 @@ export const JsonMultiLineGraph = () => {
     dataMapping(jsonDataSet1);
     setCurve([curveBasis]);
     return () => setDataArr([]);
-  }, [dataArr.length]);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center">
