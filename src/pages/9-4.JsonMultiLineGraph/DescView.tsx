@@ -14,7 +14,8 @@ export const DescView = () => {
       <br />
       이전과 차이점은 useState 훅과 DrawGraph 컴포넌트 myLines를 살피면 된다.
       <br />
-      아래는 x축 눈금자에 ticks(), ticksFormat()까지 적용한 모습이다.
+      아래는 애니메이션과 함께 x축 눈금자에 ticks(), ticksFormat()까지 적용한
+      모습이다.
     </div>
   );
 };
