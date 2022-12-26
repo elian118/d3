@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { axisLeft, curveBasis, scaleLinear, select } from 'd3';
-import {
-  curves,
-  dataSet1,
-  dataSet2,
-  dataSet3,
-} from '@/consts/dataSets/lineGraph';
+import { dataSet1, dataSet2, dataSet3 } from '@/consts/dataSets/lineGraph';
 import {
   offsetX,
   offsetY,
@@ -15,8 +10,8 @@ import {
 } from '@/consts/lineGraph';
 import { DescView } from '@/pages/9-3.MultiLineGraph/DescView';
 import { DrawGraph } from '@/pages/9-3.MultiLineGraph/DrawGraph';
-import { Option, Select } from '@material-tailwind/react';
 import { CurveFactory } from 'd3-shape';
+import { SelectBoxView } from '@/pages/9-3.MultiLineGraph/SelectBoxView';
 
 export const MultiLineGraph = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -25,7 +20,7 @@ export const MultiLineGraph = () => {
   const [dataArr, setDataArr] = useState<number[][]>([]);
   const [curve, setCurve] = useState<CurveFactory[]>([curveBasis]);
 
-  let yScale = scaleLinear()
+  const yScale = scaleLinear()
     .domain([0, 100])
     .range([scale * 100, 0]); // 범위(y축 높이) 두 배로 확대 => 꺾은선 추이가 그래프에 잘 드러나도록..
 
@@ -43,21 +38,7 @@ export const MultiLineGraph = () => {
     <div className="flex flex-col justify-center items-center">
       <h1>다중 꺾은선 그래프</h1>
       <DescView />
-      <div className="w-80 my-4">
-        <Select
-          label="커브 타입 선택"
-          color="teal"
-          onChange={(name) =>
-            setCurve([curves[curves.findIndex((x) => x.label === name)].value])
-          }
-        >
-          {curves.map((type, idx) => (
-            <Option key={`${type.label}-${idx}`} value={type.label}>
-              {type.label}
-            </Option>
-          ))}
-        </Select>
-      </div>
+      <SelectBoxView setCurve={setCurve} />
       <svg ref={svgRef} className="w-[360px] h-[240px] border border-gray-200">
         <g className="axis" transform={`translate(${offsetX}, ${offsetY})`} />
         {dataArr.length > 0 &&

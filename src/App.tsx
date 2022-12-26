@@ -7,7 +7,7 @@ const App = () => {
   const [disIdx, setDisIdx] = useState<number>(0);
 
   useEffect(() => {
-    setDisIdx(14);
+    setDisIdx(15);
   }, []);
 
   return (

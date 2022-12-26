@@ -13,6 +13,7 @@ import { CsvPieChart } from '@/pages/8-6.CsvPieChart/CsvPieChart';
 import { LineGraph } from '@/pages/9-1.LineGraph';
 import { TextLineGraph } from '@/pages/9-2.TextLineGraph';
 import { MultiLineGraph } from '@/pages/9-3.MultiLineGraph';
+import { JsonMultiLineGraph } from '@/pages/9-4.JsonMultiLineGraph';
 
 export const compList = [
   <Sample />,
@@ -30,4 +31,5 @@ export const compList = [
   <LineGraph />,
   <TextLineGraph />,
   <MultiLineGraph />,
+  <JsonMultiLineGraph />,
 ];

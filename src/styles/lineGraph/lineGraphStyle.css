@@ -10,7 +10,7 @@
     @apply fill-none stroke-black;
 }
 
-.axisX line {
+.axisX .axisY line {
     @apply fill-none stroke-black;
 }
 
