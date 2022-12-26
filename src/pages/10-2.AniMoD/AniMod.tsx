@@ -4,6 +4,7 @@ import { dataSet, svgHeight, svgWidth } from '@/consts/measureOfDispersion';
 import { useInterval } from '@/hooks';
 import { SelectBoxView } from '@/pages/10-2.AniMoD/SelectBoxView';
 import { DescView } from '@/pages/10-2.AniMoD/DescView';
+import '../../styles/measureOfDispersion/measureOfDispersionStyle.css';
 
 export const AniMod = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
