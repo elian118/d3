@@ -27,7 +27,7 @@ export const AniMod = () => {
       .selectAll('circle')
       .data(data)
       .transition()
-      .ease(easeType[0])
+      .ease(easeType[0]) // ease 패턴 적용
       .duration(1000)
       .attr('cx', (d) => d[0])
       .attr('cy', (d) => svgHeight - d[1]);
