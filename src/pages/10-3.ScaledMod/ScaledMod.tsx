@@ -81,7 +81,7 @@ export const ScaledMod = () => {
         {data.map((d, i) => (
           <circle
             key={i}
-            className="mark"
+            className={isReload ? 'markAct' : 'mark'}
             cx={d[0]}
             cy={svgHeight - d[1]}
             r="5"

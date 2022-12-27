@@ -18,7 +18,11 @@ export const SelectBoxView: FC<SelectBoxViewProps> = ({
 
   return (
     <div className="my-4 flex flex-row items-center justify-center">
-      <Button color="teal" size="sm" onClick={() => setIsReload(!isReload)}>
+      <Button
+        color={isReload ? 'indigo' : 'teal'}
+        size="sm"
+        onClick={() => setIsReload(!isReload)}
+      >
         데이터셋 갱신 {isReload ? '중지' : '시작'}
       </Button>
       <div className="mx-2">

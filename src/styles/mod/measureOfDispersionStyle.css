@@ -2,6 +2,10 @@
     @apply fill-teal-500 stroke-none;
 }
 
+.markAct {
+    @apply fill-indigo-500 stroke-none;
+}
+
 .axis text {
     @apply font-serif text-base;
 }
