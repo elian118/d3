@@ -26,8 +26,11 @@ export const ScaledMod = () => {
     easeLinear,
   ]);
 
-  const maxX = Number(max(data, (d) => d[0]));
-  const maxY = Number(max(data, (d) => d[1]));
+  const maxValX = Number(max(data, (d) => d[0]));
+  const maxValY = Number(max(data, (d) => d[1]));
+
+  const maxX = isNaN(maxValX) ? 0 : maxValX;
+  const maxY = isNaN(maxValY) ? 0 : maxValY;
 
   const rescale = () => {
     const xScale = scaleLinear().domain([0, maxX]).range([0, maxX]);

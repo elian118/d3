@@ -7,7 +7,10 @@ type ScaledLineViewProps = {
   maxY: number;
 };
 
-export const ScaledLineView: FC<ScaledLineViewProps> = ({ maxX, maxY }) => {
+export const ScaledLineView: FC<ScaledLineViewProps> = ({
+  maxX = 0,
+  maxY = 0,
+}) => {
   const rangeX = range(50, maxX, 50);
   const rangeY = range(20, maxY, 20);
 
