@@ -17,3 +17,9 @@
 .axisX .axisY line {
     @apply fill-none stroke-black;
 }
+
+.grid {
+    @apply stroke-gray-500;
+    stroke-dasharray: 4, 2;
+    shape-rendering: crispEdges;
+}

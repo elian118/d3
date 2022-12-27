@@ -9,9 +9,9 @@ import {
 } from '@/consts/measureOfDispersion';
 import '../../styles/mod/measureOfDispersionStyle.css';
 import {
+  DescView,
   ScaledLineView,
   SelectBoxView,
-  DescView,
 } from '@/pages/10-3.ScaledMod';
 import { useInterval } from '@/hooks';
 
@@ -77,7 +77,7 @@ export const ScaledMod = () => {
         setEaseType={setEaseType}
       />
       <svg ref={svgRef} className="w-[400px] h-[250px] overflow-visible">
-        <ScaledLineView maxY={maxY} />
+        <ScaledLineView maxX={maxX} maxY={maxY} />
         {data.map((d, i) => (
           <circle
             key={i}
