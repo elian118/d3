@@ -14,6 +14,7 @@ import {
   SelectBoxView,
 } from '@/pages/10-3.ScaledMod';
 import { useInterval } from '@/hooks';
+import { Tooltip } from '@material-tailwind/react';
 
 export const ScaledMod = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -42,7 +43,10 @@ export const ScaledMod = () => {
 
   const updateData = () => {
     setData(
-      data.map(() => [Math.random() * svgWidth, Math.random() * svgHeight]),
+      data.map(() => [
+        Math.floor(Math.random() * svgWidth),
+        Math.floor(Math.random() * svgHeight),
+      ]),
     );
   };
 
@@ -82,13 +86,21 @@ export const ScaledMod = () => {
       <svg ref={svgRef} className="w-[400px] h-[250px] overflow-visible">
         <ScaledLineView maxX={maxX} maxY={maxY} />
         {data.map((d, i) => (
-          <circle
+          <Tooltip
             key={i}
-            className={isReload ? 'markAct' : 'mark'}
-            cx={d[0]}
-            cy={svgHeight - d[1]}
-            r="5"
-          />
+            content={`${data[i][0]}, ${data[i][1]}`}
+            animate={{
+              mount: { scale: 1, y: 0 },
+              unmount: { scale: 0, y: 25 },
+            }}
+          >
+            <circle
+              className={isReload ? 'markAct' : 'mark'}
+              cx={d[0]}
+              cy={svgHeight - d[1]}
+              r="5"
+            />
+          </Tooltip>
         ))}
       </svg>
     </div>
