@@ -15,7 +15,7 @@ export const AniMod = () => {
 
   const [data, setData] = useState<number[][]>([]);
   const [isReload, setIsReload] = useState<boolean>(false);
-  const [term, setTerm] = useState<number>(1000);
+  const [term, setTerm] = useState<number>(1000); // 애니메이션과 데이터 갱신 간격(밀리초)
 
   const updateData = (dataSet) => {
     setData(
@@ -29,7 +29,7 @@ export const AniMod = () => {
       .data(data)
       .transition()
       .ease(easeType[0]) // ease 패턴 적용
-      .duration(term)
+      .duration(term) // easeType[0](term) => ex. easeExp(term)과 같다.
       .attr('cx', (d) => d[0])
       .attr('cy', (d) => svgHeight - d[1]);
   };
