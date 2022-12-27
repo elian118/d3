@@ -15,6 +15,7 @@ export const AniMod = () => {
 
   const [data, setData] = useState<number[][]>([]);
   const [isReload, setIsReload] = useState<boolean>(false);
+  const [term, setTerm] = useState<number>(1000);
 
   const updateData = (dataSet) => {
     setData(
@@ -28,7 +29,7 @@ export const AniMod = () => {
       .data(data)
       .transition()
       .ease(easeType[0]) // ease 패턴 적용
-      .duration(1000)
+      .duration(term)
       .attr('cx', (d) => d[0])
       .attr('cy', (d) => svgHeight - d[1]);
   };
@@ -38,7 +39,7 @@ export const AniMod = () => {
       updateData(data);
       data.length > 0 && updateGraph();
     },
-    isReload ? 1000 : null,
+    isReload ? term : null,
   );
 
   useEffect(() => {
@@ -50,8 +51,9 @@ export const AniMod = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <h1>산포도 - 애니메이션</h1>
-      <DescView />
+      <DescView term={term} />
       <SelectBoxView
+        termState={[term, setTerm]}
         isReloadState={[isReload, setIsReload]}
         setEaseType={setEaseType}
       />

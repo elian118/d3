@@ -1,23 +1,36 @@
 import React, { FC } from 'react';
-import { Button, Option, Select } from '@material-tailwind/react';
+import { Button, Input, Option, Select } from '@material-tailwind/react';
 import { eases } from '@/consts/measureOfDispersion';
 
 type SelectBoxViewProps = {
   isReloadState: [boolean, (val: boolean) => void];
   setEaseType: (x: any[]) => void;
+  termState: [number, (val: number) => void];
 };
 
 export const SelectBoxView: FC<SelectBoxViewProps> = ({
   isReloadState,
   setEaseType,
+  termState,
 }) => {
   const [isReload, setIsReload] = isReloadState;
+  const [term, setTerm] = termState;
+
   return (
     <div className="my-4 flex flex-row items-center justify-center">
-      <div className="mr-2">
-        <Button color="teal" size="sm" onClick={() => setIsReload(!isReload)}>
-          데이터셋 갱신 {isReload ? '중지' : '시작'}
-        </Button>
+      <Button color="teal" size="sm" onClick={() => setIsReload(!isReload)}>
+        데이터셋 갱신 {isReload ? '중지' : '시작'}
+      </Button>
+      <div className="mx-2">
+        <Input
+          label="갱신 간격(밀리초)"
+          type="number"
+          value={term}
+          onChange={(e) => {
+            const val = Number(e.target.value);
+            val > 0 && val < 10000 && Number.isSafeInteger(val) && setTerm(val);
+          }}
+        />
       </div>
       <div className="w-48">
         <Select
