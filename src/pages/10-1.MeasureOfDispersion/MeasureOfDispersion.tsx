@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { dataSet } from '@/consts/measureOfDispersion/dataSet';
 import { svgHeight } from '@/consts/lineGraph';
-import '../../styles/measureOfDispersion/measureOfDispersionStyle.css';
+import '../../styles/mod/measureOfDispersionStyle.css';
 
 export const MeasureOfDispersion = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);

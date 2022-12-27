@@ -1,0 +1,15 @@
+.mark {
+    @apply fill-teal-500 stroke-none;
+}
+
+.axis text {
+    @apply font-serif text-base;
+}
+
+.axis path, .axis line {
+    @apply fill-none stroke-black;
+}
+
+.axisX .axisY line {
+    @apply fill-none stroke-black;
+}

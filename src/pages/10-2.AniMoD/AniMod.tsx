@@ -4,18 +4,18 @@ import { dataSet, svgHeight, svgWidth } from '@/consts/measureOfDispersion';
 import { useInterval } from '@/hooks';
 import { SelectBoxView } from '@/pages/10-2.AniMoD/SelectBoxView';
 import { DescView } from '@/pages/10-2.AniMoD/DescView';
-import '../../styles/measureOfDispersion/measureOfDispersionStyle.css';
+import '../../styles/mod/measureOfDispersionStyle.css';
 
 export const AniMod = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const svg = select(svgRef?.current);
-  const [easeType, setEaseType] = useState<((val: number) => number)[]>([
-    easeLinear,
-  ]);
 
   const [data, setData] = useState<number[][]>([]);
   const [isReload, setIsReload] = useState<boolean>(false);
   const [term, setTerm] = useState<number>(1000); // 애니메이션과 데이터 갱신 간격(밀리초)
+  const [easeType, setEaseType] = useState<((val: number) => number)[]>([
+    easeLinear,
+  ]); // D3 EASE 패턴
 
   const updateData = (dataSet) => {
     setData(
